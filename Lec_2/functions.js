@@ -22,3 +22,6 @@ function sayHi( fullName  , fun  ){
 
 sayHi("TONY STARK" , getFirstName);
 sayHi("BRUCE BANNER" ,  getLastName);
+let naam="ritik khokar";
+let val=naam.split("");
+console.log(val);
