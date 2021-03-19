@@ -1,0 +1,15 @@
+{
+  "name": "Lec_03_cat_commands",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "rk": "test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
