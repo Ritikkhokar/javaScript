@@ -15,10 +15,12 @@ function parseData(html)
     let highWicketSoFar=0;
     let nameOfHighestWicketTaker;
     let economy;
+    
+    let bowlerTeam;
 let ch = cherrio.load(html);
 let bothBowlingTables = ch('.table.bowler');
 fs.writeFileSync("./bowlingTables.html",bothBowlingTables+"");
-
+let team=ch('.header-title.label');
 for(let i=0;i<bothBowlingTables.length;i++)
 {
     let bowlingTable=ch(bothBowlingTables[i]);
@@ -33,6 +35,7 @@ for(let i=0;i<bothBowlingTables.length;i++)
             highWicketSoFar=wicketsTaken;
             nameOfHighestWicketTaker=ch(allTds['0']).text();  //name is present on key 0
             economy=ch(allTds['5']).text();     //economy is present on key 5
+            bowlerTeam=ch(team[i]).text();
         }
     }
 }
@@ -40,5 +43,6 @@ for(let i=0;i<bothBowlingTables.length;i++)
 baller.nane= nameOfHighestWicketTaker;
 baller.wickets=highWicketSoFar;
 baller.economy=economy;
+baller.Team=bowlerTeam.slice(-16);
 console.log(baller);
 }
