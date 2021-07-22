@@ -88,7 +88,7 @@ let browserOpenPromise = puppeteer.launch({
           
           let oneQuestionSolvePromise = solveQuestion(completeLinks[0]);
            
-          for(let i=0;i<completeLinks.length;i++)
+          for(let i=1;i<completeLinks.length;i++)
           {
               oneQuestionSolvePromise = oneQuestionSolvePromise.then(function(){
                   let nextQuestionSolvePromise = solveQuestion(completeLinks[i]);
