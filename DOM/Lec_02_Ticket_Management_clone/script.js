@@ -13,6 +13,7 @@ let openModalBtn = document.querySelector(".open-modal");
 
 function loadTickets(){
     if(localStorage.getItem("allTickets")){
+      ticketContainer.innerHTML = "";
       let allTickets = JSON.parse(localStorage.getItem("allTickets"));
       for(let i=0 ; i<allTickets.length ; i++){
         let {ticketId , ticketFilter , ticketContent} = allTickets[i];
@@ -129,7 +130,7 @@ function chooseModalFilter(e) {
     // set selected filter as the now choose filter !!!
     selectedFilter = selectedModalFilter;
     // remove active filter class
-    document.querySelector(".active-filter").classList.remove("active-filter");
+    document.querySelector(".modal-filter.active-filter").classList.remove("active-filter");
     // add active filter class on now selected filter 
     e.target.classList.add("active-filter");
 }
@@ -148,7 +149,51 @@ allFilters[i].addEventListener("click",chooseFilter);
 
 function chooseFilter(e)
 {
-    let filter = e.target.classList[1];
-    let filtercode = filterCodes[filter];
-    ticketContainer.style.background = filtercode;
+  if(e.target.classList.contains("active-filter"))
+  {
+     e.target.classList.remove('active-filter');
+    // console.log(filter);
+    loadTickets();
+    return;
+  }
+// remove active filter from already selected filter
+  if(document.querySelector(".filter.active-filter"))
+  {
+    document.querySelector(".filter.active-filter").classList.remove("active-filter");
+  }
+  // add active filter on now selected filter !!
+  e.target.classList.add("active-filter");
+  let ticketFilter = e.target.classList[1];
+  // console.log(ticketFilter);
+  loadSelectedTickets(ticketFilter);
+}
+
+
+function loadSelectedTickets(ticketFilter)
+{
+  if(localStorage.getItem("allTickets"))
+  {
+    let allTickets = JSON.parse(localStorage.getItem("allTickets"));
+
+    let filteredTickets = allTickets.filter( function(filterObject){
+      return filterObject.ticketFilter == ticketFilter;
+    });
+    // console.log(localStorage.getItem("allTickets"));
+    // console.log(filteredTickets);
+  
+  ticketContainer.innerHTML = "";
+  for(let i=0 ; i<filteredTickets.length ; i++){
+    let {ticketId , ticketFilter , ticketContent} = filteredTickets[i];
+
+    let ticketDiv = document.createElement("div");
+    ticketDiv.classList.add("ticket");
+    // set the html of the ticket wala div !!
+    ticketDiv.innerHTML = ` <div class="ticket-filter ${ticketFilter}"></div>
+    <div class="ticket-id">#${ticketId}</div>
+    <div class="ticket-content">${ticketContent}</div>`;
+
+    // append the ticket on the UI !!!!
+    ticketContainer.append(ticketDiv);
+  }
+  }
 }
