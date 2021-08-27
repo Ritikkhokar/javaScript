@@ -43,8 +43,26 @@ for(let i=0;i<allCells.length;i++)
             // console.log("same value");
             return;
         }
+        if(cellObject.formula){
+            removeFormula(cellObject);
+            //formulaInput value = ""
+            formulaInput.value="";
+        }
         cellObject.value = cellValue;
         updateChildrens(cellObject);
+    })
+    allCells[i].addEventListener("keydown" , function(e){
+        if(e.key == "Backspace"){
+            let cell = e.target;
+            let {rowId , colId} = getRowIdColIdFromElement(cell);
+            let cellObject = db[rowId][colId];
+            if(cellObject.formula){
+                cellObject.formula = "";
+                formulaInput.value = "";
+                removeFormula(cellObject);
+                cell.textContent = "";
+            }
+        }
     })
 }
 //  when someone leaves the formula input
@@ -54,6 +72,10 @@ formulaInput.addEventListener("focusout",function(e)
     if(formula){
         let {rowId , colId} = getRowIdColIdFromElement(lastSelectedCell);
         let cellObject = db[rowId][colId];
+        // if cellObject already had a formula
+        if(cellObject.formula){
+            removeFormula(cellObject);
+        }
         let computedValue = solveFormula(formula,cellObject);
         // formula update
         cellObject.formula = formula;
@@ -62,5 +84,7 @@ formulaInput.addEventListener("focusout",function(e)
         // ui update
         lastSelectedCell.textContent = computedValue;
         // console.log(db);
+         // update childrens !!!
+         updateChildrens(cellObject);
     }
 })
