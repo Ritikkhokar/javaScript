@@ -32,11 +32,12 @@ function initCells()
     cellsContentDiv.innerHTML = cellsContent;
 }
 initCells();
-
+let sheetsDB = [];
 let db;
+let visitedCells;
 function initdb()
 {
-    db = [];
+    newSheetDB = [];
 
     for(let i=0;i<100;i++)
     {
@@ -50,12 +51,18 @@ function initdb()
                 value:"",
                 formula:"",
                 childrens:[],
-                parents:[]
+                parents:[],
+                visited:false
             }
             row.push(cellObject);
         }
-        db.push(row);
+        newSheetDB.push(row);
     }
     // console.log(db);
+    visitedCells = [];
+    db = newSheetDB;
+    sheetsDB.push({db:newSheetDB ,visitedCells:visitedCells});
+    console.log(sheetsDB);
+    
 }
 initdb();

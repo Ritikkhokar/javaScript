@@ -50,6 +50,14 @@ for(let i=0;i<allCells.length;i++)
         }
         cellObject.value = cellValue;
         updateChildrens(cellObject);
+
+        if(cellObject.visited)
+        {
+            return;
+        }
+        cellObject.visited = true;
+        visitedCells.push({rowId:rowId , colId:colId});
+        console.log(sheetsDB);
     })
     allCells[i].addEventListener("keydown" , function(e){
         if(e.key == "Backspace"){
@@ -86,5 +94,11 @@ formulaInput.addEventListener("focusout",function(e)
         // console.log(db);
          // update childrens !!!
          updateChildrens(cellObject);
+         if(cellObject.visited){
+            return;
+        }
+        cellObject.visited = true;
+        visitedCells.push({rowId:rowId , colId:colId})
+        console.log(sheetsDB);
     }
 })
