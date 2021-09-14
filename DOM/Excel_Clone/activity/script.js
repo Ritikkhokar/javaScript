@@ -27,7 +27,18 @@ for(let i=0;i<allCells.length;i++)
         let address = String.fromCharCode(65+colId)+(rowId+1)+"";
         addressInput.value = address;
         formulaInput.value = cellObject.formula;
-    })
+        cellObject.fontStyle.bold
+      ? document.querySelector(".bold").classList.add("active-font-style")
+      : document.querySelector(".bold").classList.remove("active-font-style");
+       
+      cellObject.fontStyle.italic
+      ? document.querySelector(".italic").classList.add("active-font-style")
+      : document.querySelector(".italic").classList.remove("active-font-style");
+      
+      cellObject.fontStyle.underline
+      ? document.querySelector(".underline").classList.add("active-font-style")
+      : document.querySelector(".underline").classList.remove("active-font-style");
+    });
 
     allCells[i].addEventListener("focusout",function(e)
     {
@@ -58,7 +69,7 @@ for(let i=0;i<allCells.length;i++)
         cellObject.visited = true;
         visitedCells.push({rowId:rowId , colId:colId});
         console.log(sheetsDB);
-    })
+    });
     allCells[i].addEventListener("keydown" , function(e){
         if(e.key == "Backspace"){
             let cell = e.target;
@@ -71,7 +82,7 @@ for(let i=0;i<allCells.length;i++)
                 cell.textContent = "";
             }
         }
-    })
+    });
 }
 //  when someone leaves the formula input
 formulaInput.addEventListener("focusout",function(e)

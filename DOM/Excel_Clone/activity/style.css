@@ -7,16 +7,89 @@
 
 .menu
 {
-border: 1px solid;
-height: 30px;
-}
 
+height: 50px;
+display: flex;
+background: #ecf0f1;
+/* justify-content: center; */
+align-items: center;
+border-bottom: 1px solid lightgray;
+}
+.menu div {
+    width: 80px;
+    /* background: aquamarine; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid lightgray;
+    cursor: pointer;
+}
+.file
+{
+    font-size: 30px;
+    /* margin-left: 4px; */
+}
+.home
+{
+    font-size: 30px;
+    /* margin-left: 7px; */
+}
 .menu-options
 {
-border: 1px solid;
+
 height: 60px;
 }
+.file-menu-options
+{
 
+}
+.home-menu-options
+{
+    /* display: flex; */
+    /* align-items: center; */
+    /* height: 100%; */
+}
+.font-style
+{
+    width: 150px;
+    height: 100%;
+display: flex;
+justify-content: space-around;
+align-items: center;
+font-size: 32px;
+}
+.font-style div {
+    cursor: pointer;
+    height: 30px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+.font-style div:hover{
+    background: #bdc3c7;
+    opacity: 0.5;    
+}
+.font-style div .fas {
+}
+
+.active-font-style{
+background: #bdc3c7;
+} 
+.bold
+{
+
+}
+.italic
+{
+
+}
+.underline
+{
+
+}
 .address-content
 {
 border: 1px solid;
@@ -50,6 +123,7 @@ border: 1px solid;
 min-height: 40px;
 min-width: 100px;
 max-width: 100px;
+font-size: 25px;
 }
 .top-left-cell
 {
@@ -133,4 +207,15 @@ z-index: 2;
 .active-sheet {
     background: white;
     font-weight: bold;
+}
+.active-menu
+{
+    
+        background: white;
+        font-weight: bold;
+    
+}
+.hide
+{
+    display: none;
 }
