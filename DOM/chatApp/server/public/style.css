@@ -13,6 +13,7 @@ display: flex;
 
 .left-view{
 width: 30%;
+overflow: auto;
 }
 
 .right-view{
@@ -99,4 +100,32 @@ color: white;
 font-size: 30px;
 outline: none;
 /* overflow: auto; */
+}
+.me{
+    height: 30%;
+    width: 100%;
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.user-image{
+    height: 80%;
+    width: 50%;
+}
+.user-name{
+    font-size: 29px;
+}
+.user{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+}
+.online-list{
+
+}
+.user-image img{
+    height: 100%;
+    width: 100%;
 }
