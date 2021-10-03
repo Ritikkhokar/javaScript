@@ -15,24 +15,32 @@ cellsContentDiv.addEventListener("scroll",function(e)
     topLeftCell.style.top = top + "px";
     topLeftCell.style.left = left + "px";
     leftCol.style.left = left + "px";
-})
+});
+let rowId;
+let colId;
 for(let i=0;i<allCells.length;i++)
 {
     allCells[i].addEventListener("click",function(e)
     {
-        let rowId = Number(e.target.getAttribute("rowid"));
-        let colId = Number(e.target.getAttribute("colid"));
+
+        
+        if(lastSelectedCell)
+        {
+            lastSelectedCell.classList.remove("active-cell");
+            document.querySelector(`div[trid = "${colId}"]`).classList.remove("cell-selected");
+            document.querySelector(`div[lcid = "${rowId}"]`).classList.remove("cell-selected");
+        }
+         rowId = Number(e.target.getAttribute("rowid"));
+         colId = Number(e.target.getAttribute("colid"));
+        e.target.classList.add("active-cell");
+        document.querySelector(`div[trid = "${colId}"]`).classList.add("cell-selected");
+        document.querySelector(`div[lcid = "${rowId}"]`).classList.add("cell-selected");
         let cellObject = db[rowId][colId];
         // console.log(rowId,colId);
         let address = String.fromCharCode(65+colId)+(rowId+1)+"";
         addressInput.value = address;
         formulaInput.value = cellObject.formula;
-        if(lastSelectedCell)
-        {
-            lastSelectedCell.classList.remove("active-cell");
-
-        }
-        e.target.classList.add("active-cell");
+       
         cellObject.fontStyle.bold
       ? document.querySelector(".bold").classList.add("active-font-style")
       : document.querySelector(".bold").classList.remove("active-font-style");
