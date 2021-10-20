@@ -17,22 +17,24 @@ try
 
     videoPlayer.srcObject = mediaStream;
     mediaRecorder = new MediaRecorder(mediaStream);
-    console.log(mediaRecorder);
+    // console.log(mediaRecorder);
     mediaRecorder.onstart = function(e)
     {
         console.log("recording start");
-        console.log(e);
+        // console.log(e);
     }
 
     mediaRecorder.onstop = function(e)
     {
         console.log("recording stop");
-        console.log(e);
+        // console.log(e);
     }
     mediaRecorder.ondataavailable = function(e)
     {
         console.log("recording saved");
         console.log(e);
+        recordedData = e.data;
+        saveVedioToFs();
     }
    
    recordButton.addEventListener("click",function(){
@@ -56,3 +58,18 @@ try
 
    }    
 })();
+
+function saveVedioToFs()
+{
+    let vedioUrl = URL.createObjectURL(recordedData);
+    let atag = document.createElement("a");
+    // console.log(vedioUrl);
+    atag.download="vedio.mp4";
+    atag.href = vedioUrl;
+    atag.click();
+    atag.remove();
+}
+
+
+
+
