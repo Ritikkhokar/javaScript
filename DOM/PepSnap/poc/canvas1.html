@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         * {
+        box-sizing: border-box;
+        margin: 0px;
+        padding: 0px;
+      }
+   canvas{
+    background: cornflowerblue;
+   }
+    </style>
+</head>
+<body>
+    <canvas>
+    
+    </canvas>
+    <script>
+        let canvas = document.querySelector("canvas");
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        window.addEventListener("resize",function()
+        {
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+        });
+        let ctx = canvas.getContext("2d");
+        
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 5;
+        let mousedown = false;
+       canvas.addEventListener("mousedown",function(e){
+         ctx.beginPath();
+         ctx.moveTo(e.clientX,e.clientY);
+         mousedown = true;
+       });
+       canvas.addEventListener("mousemove",function(e){
+        if(mousedown)
+        {
+            ctx.lineTo(e.clientX,e.clientY);
+            ctx.stroke();
+        }
+       });
+       canvas.addEventListener("mouseup",function()
+       {
+         mousedown = false;
+       });
+        
+    </script>
+</body>
+</html>

@@ -1,8 +1,7 @@
-
 let videoPlayer = document.querySelector("video");
 let constraints = {video:true};
 let recordButton = document.querySelector("#record-vedio");
-let photoButton = document.querySelector("#capture-photos");
+let photoButton = document.querySelector("#capture-photo");
 let recordedData;
 let recordingState = false;
 
@@ -12,7 +11,8 @@ let recordingState = false;
     // console.log(devices);
 try
 
-   { let mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+   { 
+       let mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
     console.log(mediaStream);
 
     videoPlayer.srcObject = mediaStream;
@@ -50,13 +50,16 @@ try
       recordingState = true;
       recordButton.innerHTML = "Recording";
      }
-   })
+   });
+   photoButton.addEventListener("click", capturePhotos);
+  
+}
+catch(error)
+{
+
 }
 
-   catch(error)
-   {
-
-   }    
+   
 })();
 
 function saveVedioToFs()
@@ -69,7 +72,20 @@ function saveVedioToFs()
     atag.click();
     atag.remove();
 }
+function capturePhotos()
+{
+let canvas = document.querySelector("canvas");
+canvas.height = videoPlayer.videoHeight;
+canvas.width = videoPlayer.videoWidth;
+
+let cxt = canvas.getContext("2d");
+cxt.drawImage(videoPlayer,0,0);
+let imgurl = canvas.toDataURL("image/jpg");
+let Atag = document.createElement("a");
+        Atag.download = "photo.jpg";
+        Atag.href = imgurl;
+        Atag.click();
+       Atag.remove();
 
 
-
-
+}
