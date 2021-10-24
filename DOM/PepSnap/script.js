@@ -4,7 +4,9 @@ let recordButton = document.querySelector("#record-vedio");
 let photoButton = document.querySelector("#capture-photo");
 let recordedData;
 let recordingState = false;
-
+let zoomInButton = document.querySelector(".zoomIn");
+let zoomOutButton = document.querySelector(".zoomOut");
+let zoom = 1;
 
 (async function(){
     // let devices = await navigator.mediaDevices.enumerateDevices();
@@ -54,6 +56,21 @@ try
      }
    });
    photoButton.addEventListener("click", capturePhotos);
+
+   zoomInButton.addEventListener("click",function(e){
+     if( zoom < 2)
+     {
+         zoom += 0.1;
+         videoPlayer.style.transform = "scale( "+zoom+")";
+     }
+   });
+   zoomOutButton.addEventListener("click",function(e){
+    if(zoom>0.5)
+    {
+        zoom -= 0.1;
+        videoPlayer.style.transform = "scale( "+zoom+")";
+    }
+});
   
 }
 catch(error)
