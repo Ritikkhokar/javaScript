@@ -64,6 +64,7 @@ try
          videoPlayer.style.transform = "scale( "+zoom+")";
      }
    });
+   
    zoomOutButton.addEventListener("click",function(e){
     if(zoom>0.5)
     {
@@ -103,6 +104,13 @@ canvas.height = videoPlayer.videoHeight;
 canvas.width = videoPlayer.videoWidth;
 
 let cxt = canvas.getContext("2d");
+
+if(zoom != 1)
+{
+    cxt.translate(canvas.width/2,canvas.height/2);
+    cxt.scale(zoom,zoom);
+    cxt.translate(-canvas.width/2,-canvas.height/2);
+}
 cxt.drawImage(videoPlayer,0,0);
 let imgurl = canvas.toDataURL("image/jpg");
 let Atag = document.createElement("a");
