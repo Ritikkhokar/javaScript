@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        Database Name <input id="database-name" type="text">
+        version <input id="version" type="text">
+        <button id="database-button">open Database</button>
+    </div>
+
+    <div>
+        mid <input id="media-id" type="text">
+        type <input id="media-type" type="text">
+        <button id="addMedia">Add Media</button>
+    </div>
+
+    <script>
+
+        let dbName = document.querySelector("#database-name");
+        let version = document.querySelector("#version");
+        let openDbBtn = document.querySelector("#database-button");
+        let mid = document.querySelector("#media-id");
+        let type = document.querySelector("#media-type");
+        let addMediaBtn = document.querySelector("#addMedia");
+        let db;
+     
+        openDbBtn.addEventListener("click",openDb);
+        addMediaBtn.addEventListener("click",addMedia);
+        
+       
+
+      
+       
+      function openDb()
+      {
+        let requestDb = indexedDB.open(dbName.value,version.value);
+
+        requestDb.onupgradeneeded = function(e)
+       {
+           db = e.target.result;
+           alert("In upgrade event");
+           let mediaTable = db.createObjectStore("Media" , {keyPath : "mid"});
+       }
+
+       requestDb.onsuccess = function(e)
+       {
+        alert("In Success Event");
+        db = e.target.result;
+           
+       }
+
+       requestDb.onerror = function(e)
+       {
+                alert("In Error Event !");
+                console.log(e);
+       }
+      }
+     function addMedia()
+     {
+        
+
+     }
+
+    </script>
+</body>
+</html>
