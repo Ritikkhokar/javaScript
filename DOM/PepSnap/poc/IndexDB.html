@@ -19,7 +19,7 @@
         type <input id="media-type" type="text">
         <button id="addMedia">Add Media</button>
     </div>
-
+    <button id="showMedia">Show Media</button>
     <script>
 
         let dbName = document.querySelector("#database-name");
@@ -28,11 +28,13 @@
         let mid = document.querySelector("#media-id");
         let type = document.querySelector("#media-type");
         let addMediaBtn = document.querySelector("#addMedia");
+        let showMediaBtn = document.querySelector("#showMedia");
+
         let db;
      
         openDbBtn.addEventListener("click",openDb);
         addMediaBtn.addEventListener("click",addMedia);
-        
+        showMediaBtn.addEventListener("click",showMedia);
        
 
       
@@ -63,8 +65,31 @@
       }
      function addMedia()
      {
-        
+         let txn = db.transaction("Media","readwrite");
+        let mediaStore = txn.objectStore("Media");
+        mediaStore.add({mid:mid.value , type:type.value});
+       
+        txn.onerror = function(e){
+                alert("txn failed !!");
+                console.log(e);
+        }
 
+
+     }
+     function showMedia()
+     {
+        let txn = db.transaction("Media" , "readonly");
+            let mediaStore = txn.objectStore("Media");
+
+            let cursorObject = mediaStore.openCursor();
+
+            cursorObject.onsuccess = function(e){                
+                let cursor = cursorObject.result;
+                if(cursor){
+                    console.log(cursor.value);
+                    cursor.continue();
+                }
+            }
      }
 
     </script>
