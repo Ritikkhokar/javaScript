@@ -85,12 +85,18 @@ catch(error)
 function saveVedioToFs()
 {
     let vedioUrl = URL.createObjectURL(recordedData);
-    let atag = document.createElement("a");
-    // console.log(vedioUrl);
-    atag.download="vedio.mp4";
-    atag.href = vedioUrl;
-    atag.click();
-    atag.remove();
+    let iv = setInterval( function(){
+        if(db){
+          saveMedia("Video" , vedioUrl);
+          clearInterval(iv);
+        }
+      }  , 100 );
+    // let atag = document.createElement("a");
+    // // console.log(vedioUrl);
+    // atag.download="vedio.mp4";
+    // atag.href = vedioUrl;
+    // atag.click();
+    // atag.remove();
 }
 function capturePhotos()
 {
@@ -112,12 +118,18 @@ if(zoom != 1)
     cxt.translate(-canvas.width/2,-canvas.height/2);
 }
 cxt.drawImage(videoPlayer,0,0);
-let imgurl = canvas.toDataURL("image/jpg");
-let Atag = document.createElement("a");
-        Atag.download = "photo.jpg";
-        Atag.href = imgurl;
-        Atag.click();
-       Atag.remove();
+let imgUrl = canvas.toDataURL("image/jpg");
+
+    
+      saveMedia("image" , imgUrl);
+     
+   
+
+// let Atag = document.createElement("a");
+//         Atag.download = "photo.jpg";
+//         Atag.href = imgurl;
+//         Atag.click();
+//        Atag.remove();
 
 
 }

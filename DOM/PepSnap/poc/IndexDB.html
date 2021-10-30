@@ -47,15 +47,21 @@
        {
            db = e.target.result;
            alert("In upgrade event");
-           let mediaTable = db.createObjectStore("Media" , {keyPath : "mid"});
+        //    let mediaTable = db.createObjectStore("table" , {keyPath : "mid"});
        }
 
        requestDb.onsuccess = function(e)
        {
         alert("In Success Event");
         db = e.target.result;
-           
-       }
+
+          db.onversionchange = function(e)
+          {
+            alert("version changed!");
+            db.close();
+
+          } 
+       };
 
        requestDb.onerror = function(e)
        {
@@ -65,8 +71,8 @@
       }
      function addMedia()
      {
-         let txn = db.transaction("Media","readwrite");
-        let mediaStore = txn.objectStore("Media");
+         let txn = db.transaction("table","readwrite");
+        let mediaStore = txn.objectStore("table");
         mediaStore.add({mid:mid.value , type:type.value});
        
         txn.onerror = function(e){
@@ -78,8 +84,8 @@
      }
      function showMedia()
      {
-        let txn = db.transaction("Media" , "readonly");
-            let mediaStore = txn.objectStore("Media");
+        let txn = db.transaction("table" , "readonly");
+            let mediaStore = txn.objectStore("table");
 
             let cursorObject = mediaStore.openCursor();
 
