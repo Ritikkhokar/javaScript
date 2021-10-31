@@ -52,19 +52,69 @@ image.src = media.MediaSource;
 mediaDiv.setAttribute("mid",media.mid);
 mediaDiv.querySelector(".media").append(image);
 gallery.append(mediaDiv);
+mediaDiv.querySelector(".download").addEventListener("click",function()
+{
+    downloadMedia(media);
+});
+mediaDiv.querySelector(".delete").addEventListener("click",function()
+{
+    deleteMedia(media);
+});
 }
 
 function appendVedio(media)
 {
+    let blob = new Blob([media.MediaSource], { type: "video/mp4" });
+    let videoUrl = URL.createObjectURL(blob);
     let mediaDiv = createMediaDiv();
     mediaDiv.setAttribute("mid",media.mid);
 
     let vedio = document.createElement("video");
-    let source = document.createElement("source");
-    source.src = media.MediaSource;
-    vedio.append(source);
+    
+    vedio.src = videoUrl;
+    
     vedio.autoplay = "true";
   vedio.loop = "true";
+  vedio.controls = "true";
   mediaDiv.querySelector(".media").append(vedio);
 gallery.append(mediaDiv);
+mediaDiv.querySelector(".download").addEventListener("click",function()
+{
+    downloadMedia(media);
+});
+mediaDiv.querySelector(".delete").addEventListener("click",function()
+{
+    deleteMedia(media);
+});
+}
+
+function downloadMedia(media)
+{
+let atag = document.createElement("a");
+if(media.MediaType == "image")
+{
+atag.download = "image.png";
+atag.href = media.MediaSource;
+}
+else 
+{
+    let blob = new Blob([media.mediaSource], { type: "video/mp4" });
+  let videoUrl = URL.createObjectURL(blob);
+   atag.download = "vedio.mp4";
+   atag.href = videoUrl;
+}
+atag.click();
+atag.remove();
+}
+
+function deleteMedia(media)
+{
+// db delete
+let mid = media.mid;
+let txn = db.transaction("Media","readwrite");
+let mediaStore = txn.objectStore("Media");
+mediaStore.delete(mid);
+
+// ui delete
+document.querySelector(`div[mid="${mid}"]`).remove();
 }

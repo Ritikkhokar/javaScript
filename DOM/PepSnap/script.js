@@ -84,10 +84,11 @@ catch(error)
 
 function saveVedioToFs()
 {
-    let vedioUrl = URL.createObjectURL(recordedData);
+    // let vedioUrl = URL.createObjectURL(recordedData);
+    // console.log(vedioUrl);
     let iv = setInterval( function(){
         if(db){
-          saveMedia("Video" , vedioUrl);
+          saveMedia("Video" , recordedData);
           clearInterval(iv);
         }
       }  , 100 );
@@ -119,7 +120,7 @@ if(zoom != 1)
 }
 cxt.drawImage(videoPlayer,0,0);
 let imgUrl = canvas.toDataURL("image/jpg");
-
+console.log(imgUrl);
     
       saveMedia("image" , imgUrl);
      
