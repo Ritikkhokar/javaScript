@@ -56,3 +56,16 @@ img {
     font-size: 25px;
     color:#e74c3c
 } 
+ .back-btn{
+    height: 101px;
+    width: 101px;
+    border: 8px solid hotpink;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 626px;
+    right: 104px;
+
+ }

@@ -106,3 +106,20 @@ video {
 .zoomOut{
 
 }
+ #show-media{
+    height: 101px;
+    width: 101px;
+    border: 8px solid hotpink;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 626px;
+    right: 104px;
+
+}
+#show-media i{
+    font-size: 50px;
+    color: ivory;
+}
