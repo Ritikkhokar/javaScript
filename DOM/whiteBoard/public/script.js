@@ -11,7 +11,7 @@ canvas.height = window.innerHeight - canvasTop;
 });
 
 let ctx = canvas.getContext("2d");
-
+ctx.lineCap = 'round';
 let isMouseDown = false;
 
 canvas.addEventListener("mousedown",function(e)

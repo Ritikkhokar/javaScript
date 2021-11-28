@@ -33,3 +33,78 @@
 #canvas{
 
 }
+.tool-Options-pencil{
+    position: absolute;
+    border: 2px solid;
+    height: 100px;
+    width: 80px;
+    border-radius: 10px;
+    top: 60px;
+    left: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: center; */
+}
+.pencil-Size {
+    top: 5px;
+
+}
+.pencil-Size input{
+    width: 100%;
+
+}
+.pencil-colour{
+
+display: flex;
+
+justify-content: space-around;
+}
+.red{
+height: 15px;
+width: 15px;
+background-color: red;
+border-radius: 50px;
+}
+.blue{
+    height: 15px;
+    width: 15px;
+    background-color: blue;
+    border-radius: 50px;
+}
+.black{
+    height: 15px;
+    width: 15px;
+    background-color:black;
+    border-radius: 50px;
+}
+.yellow{
+    height: 15px;
+    width: 15px;
+    background-color: yellow;
+    border-radius: 50px;
+}
+.eraser-size{
+
+
+}
+.tool-Options-eraser{
+    position: absolute;
+    border: 2px solid;
+    height: 100px;
+    width: 80px;
+    border-radius: 10px;
+    top: 60px;
+    left: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* align-items: center; */
+}
+.eraser-Size input{
+    width: 100%;
+
+}
+.hide{
+    display: none;
+}
