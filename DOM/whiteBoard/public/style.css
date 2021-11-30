@@ -25,6 +25,10 @@
 .tool img {
     height: 100%;
     width: 100%;
+    transition: transform 0.5s;
+}
+.tool img:hover{
+    transform: scale(1.1);
 }
 .canvas-content{
 
@@ -107,4 +111,48 @@ border-radius: 50px;
 }
 .hide{
     display: none;
+}
+.sticky{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 150px;
+    width: 190px;
+    /* border: 2px solid black; */
+}
+.header{
+    height: 15%;
+    background: cadetblue;
+    display: flex;
+    /* display: flex; */
+    justify-content: flex-end;
+    align-items: center;
+}
+.header div{
+    height: 50%;
+    width: 8%;
+    border-radius: 50px;
+    margin-right: 5px;
+}
+.minimize{
+background-color: violet;
+}
+.delete{
+background-color: red;
+}
+.sticky-content{
+    height: 85%;
+}
+textarea{
+
+ height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px;
+    border: 1px solid lightgray; 
+}
+.image-upload{
+    height: 100%;
+    width: 100%;
 }
